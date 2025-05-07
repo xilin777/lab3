@@ -26,19 +26,11 @@ if __name__ == "__main__":
                 line = line.strip()  
                 if not line:
                     continue
-                    parts = line.split() 
-                    request = None
-                    
-                    if len(parts) == 2:  
-                        command = parts[0]  
-                        key = parts[1]  
-                        if command == 'R': 
-                            request = f" R {key}"  
-                        elif command == 'G':  
-                            request = f" G {key}"  
-                        else:
-                            print(f"Invalid command: {command}") 
-                            continue    
+                parts = line.split() 
+                command = parts[0]  
+                if command not in ['R', 'G', 'P']:
+                    print(f"Invalid command: {command}")
+                    continue
                         
 
                     elif len(parts) == 3:  
