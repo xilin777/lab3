@@ -92,6 +92,14 @@ if __name__ == "__main__":
     port = int(sys.argv[1])  
     if port < 50000 or port > 59999:  
         print("Port must be between 50000 and 59999")
-        sys.exit(1)        
+        sys.exit(1)     
+        
+    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+    serversocket.bind(('localhost', port))  
+    serversocket.listen(5)  
+    summarythread = threading.Thread(target=printsummary)  
+    summarythread.daemon = True  
+    summarythread.start()  
+    print(f"Server listening on port {port}")           
         
                         
