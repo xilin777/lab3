@@ -27,6 +27,17 @@ if __name__ == "__main__":
                 if line:  
                     parts = line.split() 
                     
+                    if len(parts) == 2:  # 如果是 READ 或 GET 请求
+                        command = parts[0]  # 获取命令
+                        key = parts[1]  # 获取键
+                        if command == 'R':  # 如果是 READ 命令
+                            request = f" R {key}"  # 构造请求
+                        elif command == 'G':  # 如果是 GET 命令
+                            request = f" G {key}"  # 构造请求
+                        else:
+                            print(f"Invalid command: {command}")  # 如果命令无效
+                            continue  # 跳过当前行
+                    
                     
         
        
