@@ -44,13 +44,19 @@ if __name__ == "__main__":
                         continue
                     send_request(client_socket, request)
 
-                    
-                if request:
-                    collated_size = len(key) + len(value) if command == 'P' else len(key)  
-                    if collated_size > 970:  
-                        print(f"Error: Collated size exceeds 970 characters. Ignoring request: {line}")  
-                    else:
-                        send_request(client_socket, request)  
+                elif command == 'P':
+                    if len(parts) != 3:
+                        print(f"Invalid parameters for {command} command")
+                        continue
+                    key = parts[1]
+                    value = parts[2]
+                  
+                    collated_size = len(f"{key} {value}")  
+                    if collated_size > 970:
+                        print(f"Error: Collated size exceeds 970 characters. Ignoring request: {line}")
+                        continue
+                    request = f" P {key} {value}"
+                    send_request(client_socket, request)
                         
         client_socket.close()  
     except Exception as e:  
