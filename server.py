@@ -57,6 +57,18 @@ def handleclient(clientsocket):
         clientsocket.close()  
         clientcount -= 1  
         
-                                
-            
-            
+def printsummary():
+    while True:
+        time.sleep(10)  
+        tuplecount = len(tuplespace) 
+        if tuplecount > 0:  
+            totaltuplesize = sum(len(k) + len(v) for k, v in tuplespace.items())  
+            averagetuplesize = totaltuplesize / tuplecount  
+            totalkeysize = sum(len(k) for k in tuplespace.keys()) 
+            averagekeysize = totalkeysize / tuplecount  
+            totalvaluesize = sum(len(v) for v in tuplespace.values())  
+            averagevaluesize = totalvaluesize / tuplecount 
+        else:  
+            averagetuplesize = 0
+            averagekeysize = 0
+            averagevaluesize = 0        
