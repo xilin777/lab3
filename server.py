@@ -9,8 +9,7 @@ clientcount = 0
 def handleclient(clientsocket):
     global operationcount
     global clientcount
-    clientcount += 1 
-     
+    clientcount += 1  
     try:
         while True:
             data = clientsocket.recv(1024).decode()  
