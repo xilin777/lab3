@@ -16,3 +16,7 @@ if __name__ == "__main__":
     host = sys.argv[1]  
     port = int(sys.argv[2])  
     request_file = sys.argv[3] 
+    
+    try:
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+        client_socket.connect((host, port))  
