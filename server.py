@@ -5,6 +5,7 @@ import time
 tuplespace = {} 
 operationcount = {'total': 0, 'read': 0, 'get': 0, 'put': 0, 'error': 0} 
 clientcount = 0 
+lock = threading.Lock()
 
 def handleclient(clientsocket):
     global operationcount
@@ -15,7 +16,8 @@ def handleclient(clientsocket):
             data = clientsocket.recv(1024).decode()  
             if not data: 
                 break
-            operationcount['total'] += 1 
+            with lock:
+                operationcount['total'] += 1 
             # Parse message length (NNN) and validate
             if len(data) < 7 or not data[:3].isdigit():
                 operationcount['error'] += 1
@@ -66,7 +68,8 @@ def handleclient(clientsocket):
     except Exception as e:  
         print(f"Error handling client: {e}")
     finally:
-        clientsocket.close()  
+       with lock:
+        clientcount -= 1  
         clientcount -= 1  
         
 def printsummary():
