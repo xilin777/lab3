@@ -71,4 +71,18 @@ def printsummary():
         else:  
             averagetuplesize = 0
             averagekeysize = 0
-            averagevaluesize = 0        
+            averagevaluesize = 0  
+            
+        print(f"Tuple count: {tuplecount}")  
+        print(f"Average tuple size: {averagetuplesize}") 
+        print(f"Average key size: {averagekeysize}")
+        print(f"Average value size: {averagevaluesize}")  
+        print(f"Total connected clients: {clientcount}")  
+        print(f"Total operations: {operationcount['total']}")
+        print(f"READ operations: {operationcount['read']}")  
+        print(f"GET operations: {operationcount['get']}")  
+        print(f"PUT operations: {operationcount['put']}")  
+        print(f"Error operations: {operationcount['error']}")  
+        
+        
+                        
