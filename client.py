@@ -24,9 +24,11 @@ if __name__ == "__main__":
         with open(request_file, 'r') as file:  
             for line in file:  
                 line = line.strip()  
-                if line:  
+                if not line:
+                    continue
                     parts = line.split() 
-                    quest = None  
+                    request = None
+                    
                     if len(parts) == 2:  
                         command = parts[0]  
                         key = parts[1]  
