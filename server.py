@@ -84,5 +84,14 @@ def printsummary():
         print(f"PUT operations: {operationcount['put']}")  
         print(f"Error operations: {operationcount['error']}")  
         
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 2:  
+        print("Usage: python server.py <port>")
+        sys.exit(1)
+    port = int(sys.argv[1])  
+    if port < 50000 or port > 59999:  
+        print("Port must be between 50000 and 59999")
+        sys.exit(1)        
         
                         
