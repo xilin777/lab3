@@ -48,7 +48,11 @@ def handleclient(clientsocket):
                     response = f"{len('ERR key or value too long'):03d} ERR key or value too long"
                 else:  
                     tuplespace[key] = value  
-                    response = f"{len(f'OK ({key}, {value}) put'):03d} OK ({key}, {value}) put"  
+                    response = f"{len(f'OK ({key}, {value}) put'):03d} OK ({key}, {value}) put"
+                    
+            else:
+                operationcount['error'] += 1
+                response = f"{len('ERR unknown command'):03d} ERR unknown command"
                             
             clientsocket.send(response.encode()) 
     except Exception as e:  
