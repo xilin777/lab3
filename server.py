@@ -49,12 +49,14 @@ def handleclient(clientsocket):
                 else:  
                     tuplespace[key] = value  
                     response = f"{len(f'OK ({key}, {value}) put'):03d} OK ({key}, {value}) put"  
-                    
+                            
             clientsocket.send(response.encode()) 
     except Exception as e:  
         print(f"Error handling client: {e}")
     finally:
         clientsocket.close()  
-        clientcount -= 1                          
+        clientcount -= 1  
+        
+                                
             
             
