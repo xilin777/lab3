@@ -29,7 +29,7 @@ if __name__ == "__main__":
                     quest = None  
                     if len(parts) == 2:  
                         command = parts[0]  
-                        key = parts[1]  #
+                        key = parts[1]  
                         if command == 'R': 
                             request = f" R {key}"  
                         elif command == 'G':  
@@ -48,7 +48,7 @@ if __name__ == "__main__":
                         else:
                             print(f"Invalid command: {command}")  
                             continue  
-                        
+                if request:
                     collated_size = len(key) + len(value) if command == 'P' else len(key)  
                     if collated_size > 970:  
                         print(f"Error: Collated size exceeds 970 characters. Ignoring request: {line}")  
