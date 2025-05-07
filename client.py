@@ -12,3 +12,7 @@ if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: python client.py <host> <port> <request_file>")
         sys.exit(1) 
+
+    host = sys.argv[1]  
+    port = int(sys.argv[2])  
+    request_file = sys.argv[3] 
