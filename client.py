@@ -31,17 +31,20 @@ if __name__ == "__main__":
                 if command not in ['R', 'G', 'P']:
                     print(f"Invalid command: {command}")
                     continue
-                        
+                   
+                if command in ['R', 'G']:
+                    if len(parts) != 2:
+                        print(f"Invalid parameters for {command} command")
+                        continue
+                    key = parts[1]
+                    request = f" {command} {key}"  
+                    collated_size = len(key)  
+                    if collated_size > 970:  
+                        print(f"Error: Collated size exceeds 970 characters. Ignoring request: {line}")
+                        continue
+                    send_request(client_socket, request)
 
-                    elif len(parts) == 3:  
-                        command = parts[0]  
-                        key = parts[1]  
-                        value = parts[2]  
-                        if command == 'P':  
-                            request = f" P {key} {value}"  
-                        else:
-                            print(f"Invalid command: {command}")  
-                            continue  
+                    
                 if request:
                     collated_size = len(key) + len(value) if command == 'P' else len(key)  
                     if collated_size > 970:  
