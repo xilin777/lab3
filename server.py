@@ -37,6 +37,6 @@ def handleclient(clientsocket):
                     response = f"{len(f'OK ({key}, {value}) get'):03d} OK ({key}, {value}) get"
                 else:  
                     operationcount['error'] += 1 
-                    response = f"{len('ERR no such key'):03d} ERR no such key"           
+                    response = f"{len('ERR no such key'):03d} ERR no such key"          
             
             
