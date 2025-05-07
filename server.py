@@ -17,7 +17,7 @@ def handleclient(clientsocket):
                 break
             operationcount['total'] += 1 
             # Parse message length (NNN) and validate
-            if len(data) < 5 or not data[:3].isdigit():
+            if len(data) < 7 or not data[:3].isdigit():
                 operationcount['error'] += 1
                 response = f"{len('ERR invalid format'):03d} ERR invalid format"
                 clientsocket.send(response.encode())
@@ -25,6 +25,7 @@ def handleclient(clientsocket):
             
             size = int(data[:3])  
             command = data[3] 
+            args = data[5:]
             
             if command == 'R': 
                 operationcount['read'] += 1 
@@ -38,7 +39,7 @@ def handleclient(clientsocket):
                     
             elif command == 'G': 
                 operationcount['get'] += 1 
-                key = data[5:]  
+                key = data[6:]  
                 if key in tuplespace:  
                     value = tuplespace.pop(key)  
                     response = f"{len(f'OK ({key}, {value}) get'):03d} OK ({key}, {value}) get"
@@ -47,7 +48,7 @@ def handleclient(clientsocket):
                     response = f"{len('ERR no such key'):03d} ERR no such key" 
             elif command == 'P': 
                 operationcount['put'] += 1  
-                parts = data[5:].split(' ', 1)  
+                parts = data[6:].split(' ', 1)  
                 key = parts[0]  
                 value = parts[1]  
                 if len(key) > 999 or len(value) > 999:  
