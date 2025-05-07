@@ -28,7 +28,7 @@ def handleclient(clientsocket):
             
             if command == 'R': 
                 operationcount['read'] += 1 
-                key = data[5:]  
+                key = data[6:]  
                 if key in tuplespace:  
                     value = tuplespace[key]  
                     response = f"{len(f'OK ({key}, {value}) read'):03d} OK ({key}, {value}) read"
