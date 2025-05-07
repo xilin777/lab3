@@ -21,7 +21,7 @@ if __name__ == "__main__":
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
         client_socket.connect((host, port))
         
-        with open(request_file, 'r') as file:  
+        with open(request_file, 'r', encoding='utf-8') as file:  
             for line in file:  
                 line = line.strip()  
                 if not line:
