@@ -26,7 +26,7 @@ if __name__ == "__main__":
                 line = line.strip()  
                 if line:  
                     parts = line.split() 
-                    
+                    quest = None  
                     if len(parts) == 2:  
                         command = parts[0]  
                         key = parts[1]  #
