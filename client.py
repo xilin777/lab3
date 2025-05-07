@@ -19,7 +19,15 @@ if __name__ == "__main__":
     
     try:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-        client_socket.connect((host, port))  
+        client_socket.connect((host, port))
+        
+        with open(request_file, 'r') as file:  
+            for line in file:  
+                line = line.strip()  
+                if line:  
+                    parts = line.split() 
+                    
+                    
         
        
                     
