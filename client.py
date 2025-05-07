@@ -55,6 +55,10 @@ if __name__ == "__main__":
                     else:
                         send_request(client_socket, request)  
                         
+        client_socket.close()  
+    except Exception as e:  
+        print(f"Error: {e}")  
+                        
                     
                     
         
