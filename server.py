@@ -102,7 +102,10 @@ if __name__ == "__main__":
     summarythread.start()  
     print(f"Server listening on port {port}")   
     
-
+while True:
+        clientsocket, addr = serversocket.accept()
+        client_thread = threading.Thread(target=handleclient, args=(clientsocket,))
+        client_thread.start()
         
 
         
