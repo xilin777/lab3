@@ -16,6 +16,13 @@ def handleclient(clientsocket):
             if not data: 
                 break
             operationcount['total'] += 1 
+            # Parse message length (NNN) and validate
+            if len(data) < 5 or not data[:3].isdigit():
+                operationcount['error'] += 1
+                response = f"{len('ERR invalid format'):03d} ERR invalid format"
+                clientsocket.send(response.encode())
+                continue
+            
             size = int(data[:3])  
             command = data[3] 
             
