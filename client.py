@@ -48,6 +48,13 @@ if __name__ == "__main__":
                         else:
                             print(f"Invalid command: {command}")  
                             continue  
+                        
+                    collated_size = len(key) + len(value) if command == 'P' else len(key)  
+                    if collated_size > 970:  
+                        print(f"Error: Collated size exceeds 970 characters. Ignoring request: {line}")  
+                    else:
+                        send_request(client_socket, request)  
+                        
                     
                     
         
