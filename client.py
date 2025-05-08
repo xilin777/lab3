@@ -14,7 +14,7 @@ def send_request(sock, request):
     sock.send(formatted_request.encode())
     response = sock.recv(1024).decode()
     print(f"Request: {request}, Response: {response}")
-
+#main function
 if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: python client.py <host> <port> <request_file>")
