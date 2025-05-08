@@ -9,10 +9,11 @@ operationcount = {'total': 0, 'read': 0, 'get': 0, 'put': 0, 'error': 0}# Operat
 clientcount = 0 
 lock = threading.Lock()#add lock to prevent concurrent access to tuplespace and operationcount
 
+#Client processing function (initialization)
 def handleclient(clientsocket):
     global operationcount
     global clientcount
-    clientcount += 1  
+    clientcount += 1 #Increments by 1 each time a new client connects 
     try:
         while True:
             data = clientsocket.recv(1024).decode()  
