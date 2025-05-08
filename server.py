@@ -33,7 +33,8 @@ def handleclient(clientsocket):
             size = int(data[:3])#The first three characters of the data are the length.  
             command = data[3] # The fourth character is the command type
             args = data[5:]
-            
+          
+          #Process the READ command  
             if command == 'R': 
                 operationcount['read'] += 1 
                 key = data[6:]  
