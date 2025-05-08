@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
                 parts = line.split()
                 command = parts[0]
-
+                # Map commands to single-letter codes
                 command_mapping = {
                     'READ': 'R',
                     'GET': 'G',
