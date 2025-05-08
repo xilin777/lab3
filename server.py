@@ -35,13 +35,13 @@ def handleclient(clientsocket):
             args = data[5:]
           
           #Process the READ command  
-            if command == 'R': 
+            if command == 'R': # If it is the READ command
                 operationcount['read'] += 1 
                 key = data[6:]  
                 if key in tuplespace:  
-                    value = tuplespace[key]  
+                    value = tuplespace[key]  # Get the corresponding value
                     response = f"{len(f'OK ({key}, {value}) read'):03d} OK ({key}, {value}) read"
-                else:  
+                else:  # If the key does not exist
                     operationcount['error'] += 1  
                     response = f"{len('ERR no such key'):03d} ERR no such key" 
                     
