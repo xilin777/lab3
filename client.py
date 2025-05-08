@@ -64,8 +64,8 @@ if __name__ == "__main__":
                     key = parts[1]
                     value = " ".join(parts[2:])
                     collated_size = len(f"{key} {value}")
-                    if collated_size > 970:
-                        print(f"Error: Collated size exceeds 970 characters. Ignoring request: {line}")
+                    if collated_size > 999:
+                        print(f"Error: Collated size exceeds 999 characters. Ignoring request: {line}")
                         continue
                     request = f" P {key} {value}"
                     send_request(client_socket, request)
