@@ -122,11 +122,11 @@ if __name__ == "__main__":
         print("Port should be between 50000 and 59999")
         sys.exit(1)     
         
-    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-    serversocket.bind(('localhost', port))  
+    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Create server sockets 
+    serversocket.bind(('localhost', port))  # Bind Port
     serversocket.listen(5)  
     summarythread = threading.Thread(target=printsummary)  
-    summarythread.daemon = True  
+    summarythread.daemon = True # Set as a daemon thread 
     summarythread.start()  
     print(f"Server listening on port {port}")   
     
