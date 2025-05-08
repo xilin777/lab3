@@ -26,7 +26,7 @@ def handleclient(clientsocket):
             # Parse message length (NNN) and validate
             if len(data) < 7 or not data[:3].isdigit():
                 operationcount['error'] += 1
-                response = f"{len('ERR invalid format'):03d} ERR invalid format"
+                response = f"{len('ERROR invalid format'):03d} ERROR invalid format"
                 clientsocket.send(response.encode())
                 continue
             
@@ -43,17 +43,20 @@ def handleclient(clientsocket):
                     response = f"{len(f'OK ({key}, {value}) read'):03d} OK ({key}, {value}) read"
                 else:  # If the key does not exist
                     operationcount['error'] += 1  
-                    response = f"{len('ERR no such key'):03d} ERR no such key" 
-                    
-            elif command == 'G': 
+                    response = f"{len('ERROR no such key'):03d} ERROR no such key" 
+          
+           #Handle the GET command         
+            elif command == 'G': # If it is a GET command
                 operationcount['get'] += 1 
                 key = data[6:]  
                 if key in tuplespace:  
-                    value = tuplespace.pop(key)  
+                    value = tuplespace.pop(key) #Delete the key-value pairs and get the values 
                     response = f"{len(f'OK ({key}, {value}) get'):03d} OK ({key}, {value}) get"
                 else:  
                     operationcount['error'] += 1 
-                    response = f"{len('ERR no such key'):03d} ERR no such key" 
+                    response = f"{len('ERROR no such key'):03d} ERROR no such key" 
+            
+            
             elif command == 'P': 
                 operationcount['put'] += 1  
                 parts = data[6:].split(' ', 1)  
@@ -61,14 +64,14 @@ def handleclient(clientsocket):
                 value = parts[1]  
                 if len(key) > 999 or len(value) > 999:  
                     operationcount['error'] += 1  
-                    response = f"{len('ERR key or value too long'):03d} ERR key or value too long"
+                    response = f"{len('ERROR key or value too long'):03d} ERROR key or value too long"
                 else:  
                     tuplespace[key] = value  
                     response = f"{len(f'OK ({key}, {value}) put'):03d} OK ({key}, {value}) put"
                     
             else:
                 operationcount['error'] += 1
-                response = f"{len('ERR unknown command'):03d} ERR unknown command"
+                response = f"{len('ERROR unknown command'):03d} ERROR unknown command"
                             
             clientsocket.send(response.encode()) 
     except Exception as e:  
