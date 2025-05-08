@@ -24,13 +24,14 @@ if __name__ == "__main__":
     port = int(sys.argv[2])
     request_file = sys.argv[3]
 
+#Establish a connection
     try:
-        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect((host, port))
-
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)# Create a socket
+        client_socket.connect((host, port))# Connect to the server
+#Read the request file
         with open(request_file, 'r', encoding='utf-8') as file:
             for line in file:
-                line = line.strip()
+                line = line.strip()# Remove the extra Spaces
                 if not line:
                     continue
 
