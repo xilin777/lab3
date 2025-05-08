@@ -72,31 +72,34 @@ def handleclient(clientsocket):
             else:
                 operationcount['error'] += 1
                 response = f"{len('ERROR unknown command'):03d} ERROR unknown command"
-                            
-            clientsocket.send(response.encode()) 
+           
+           #Send responses and handle exceptions                 
+            clientsocket.send(response.encode()) # Send the response to the client
     except Exception as e:  
         print(f"Error handling client: {e}")
     finally:
        with lock:
-        clientcount -= 1  
-        clientcount -= 1  
+        clientsocket.close()  # Close the client connection
         
+         
+#Statistical information printing function        
 def printsummary():
     while True:
-        time.sleep(10)  
+        time.sleep(10) # Print once every 10 seconds
         tuplecount = len(tuplespace) 
         if tuplecount > 0:  
-            totaltuplesize = sum(len(k) + len(v) for k, v in tuplespace.items())  
-            averagetuplesize = totaltuplesize / tuplecount  
-            totalkeysize = sum(len(k) for k in tuplespace.keys()) 
-            averagekeysize = totalkeysize / tuplecount  
-            totalvaluesize = sum(len(v) for v in tuplespace.values())  
-            averagevaluesize = totalvaluesize / tuplecount 
+            totaltuplesize = sum(len(k) + len(v) for k, v in tuplespace.items())  # Calculate the total size
+            averagetuplesize = totaltuplesize / tuplecount # Calculate the average size 
+            totalkeysize = sum(len(k) for k in tuplespace.keys()) # Calculate the total size of the keys
+            averagekeysize = totalkeysize / tuplecount  # Calculate the average size of the keys
+            totalvaluesize = sum(len(v) for v in tuplespace.values())# Calculate the total size of the values  
+            averagevaluesize = totalvaluesize / tuplecount # Calculate the average size of the value
         else:  
             averagetuplesize = 0
             averagekeysize = 0
             averagevaluesize = 0  
-            
+        
+        #Statistical information printing function    
         print(f"Tuple count: {tuplecount}")  
         print(f"Average tuple size: {averagetuplesize}") 
         print(f"Average key size: {averagekeysize}")
