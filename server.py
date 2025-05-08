@@ -14,9 +14,11 @@ def handleclient(clientsocket):
     global operationcount
     global clientcount
     clientcount += 1 #Increments by 1 each time a new client connects 
+
+#Receive client data    
     try:
         while True:
-            data = clientsocket.recv(1024).decode()  
+            data = clientsocket.recv(1024).decode()  # Receive data sent by the client
             if not data: 
                 break
             with lock:
@@ -28,8 +30,8 @@ def handleclient(clientsocket):
                 clientsocket.send(response.encode())
                 continue
             
-            size = int(data[:3])  
-            command = data[3] 
+            size = int(data[:3])#The first three characters of the data are the length.  
+            command = data[3] # The fourth character is the command type
             args = data[5:]
             
             if command == 'R': 
