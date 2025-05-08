@@ -3,10 +3,11 @@ import socket
 import threading
 import time
 
+#Define global variables
 tuplespace = {} 
-operationcount = {'total': 0, 'read': 0, 'get': 0, 'put': 0, 'error': 0} 
+operationcount = {'total': 0, 'read': 0, 'get': 0, 'put': 0, 'error': 0}# Operation Count Statistics 
 clientcount = 0 
-lock = threading.Lock()
+lock = threading.Lock()#add lock to prevent concurrent access to tuplespace and operationcount
 
 def handleclient(clientsocket):
     global operationcount
