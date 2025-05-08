@@ -47,7 +47,7 @@ if __name__ == "__main__":
                     print(f"Invalid command: {command}")
                     continue
                 command = command_mapping[command]
-
+              #Handle READ and GET requests
                 if command in ['R', 'G']:
                     if len(parts) != 2:
                         print(f"Invalid parameters for {command} command")
@@ -59,7 +59,7 @@ if __name__ == "__main__":
                         print(f"Error: Collated size exceeds 999 characters. Ignoring request: {line}")
                         continue
                     send_request(client_socket, request)
-
+                #Handle PUT requests
                 elif command == 'P':
                     if len(parts) < 2:
                         print(f"Invalid parameters for {command} command")
@@ -72,7 +72,7 @@ if __name__ == "__main__":
                         continue
                     request = f" P {key} {value}"
                     send_request(client_socket, request)
-
+    #close the connection
         client_socket.close()
     except Exception as e:
         print(f"Error: {e}")
