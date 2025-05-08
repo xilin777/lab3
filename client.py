@@ -2,11 +2,12 @@
 import socket
 import sys
 
+#Define the function for sending requests
 def send_request(sock, request):
-    request = request.strip() 
-    command = request[0]     
+    request = request.strip() # Send Request
+    command = request[0] # Receive Responses    
     args = request[1:].strip() 
-    formatted_request = f"{command} {args}" 
+    formatted_request = f"{command} {args}" # Formatting
     size = len(formatted_request) + 3
     formatted_request = f"{size:03d}{formatted_request}"
     
