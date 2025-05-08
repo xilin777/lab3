@@ -56,16 +56,16 @@ def handleclient(clientsocket):
                     operationcount['error'] += 1 
                     response = f"{len('ERROR no such key'):03d} ERROR no such key" 
             
-            
-            elif command == 'P': 
+            #Handle the PUT command
+            elif command == 'P': # If it is the PUT command
                 operationcount['put'] += 1  
                 parts = data[6:].split(' ', 1)  
                 key = parts[0]  
                 value = parts[1]  
-                if len(key) > 999 or len(value) > 999:  
+                if len(key) > 999 or len(value) > 999: # If the key or value is too long 
                     operationcount['error'] += 1  
                     response = f"{len('ERROR key or value too long'):03d} ERROR key or value too long"
-                else:  
+                else:  # If the key and value are normal
                     tuplespace[key] = value  
                     response = f"{len(f'OK ({key}, {value}) put'):03d} OK ({key}, {value}) put"
                     
